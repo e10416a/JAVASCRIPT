@@ -1,26 +1,41 @@
-/* DESAFIO 1 - SIMULADOR INTERACTIVO */
+ //DESAFIO 1 - SIMULADOR INTERACTIVO */
 
 
 let precioFinal = 0;
-let precioProducto = 0;
+let opcionSistema = 0;
 let valorDescuento = 0;
+let precioProducto = 0;
+let totalFacturado = [];
 
-alert('Ingrese a continuación, los valores de los productos a facturar');
+alert('Bienvenido al sistema de administracion general. \nA continuacion seleccione la operacion que desea realizar');
 
 
-function ingresoProducto(){
-    precioProducto = Number(prompt('ingrese el valor del producto'));
-        while(precioProducto >0) {
+       
 
-            precioFinal = precioFinal + precioProducto;
-            precioProducto = Number(prompt('ingrese el valor del siguiente producto'));
-        };
 
-        if(precioProducto <=0 || isNaN(precioProducto)) {
-                console.log('El valor ingresado no corresponde a lo solicitado se finaliza la carga de prodcutos');
-        };
-           
+function operacionSistema(){
+     opcionSistema = Number(prompt('Seleccione la operacion:\n A: -Facturar pedido\n B: -Ingresar Articulo al stock\n C: -Salir '));
+            
+        if(opcionSistema = "A"){
+
+            precioProducto = Number(prompt('Ingrese el valor del producto a facturar, si desea finalizar la carga ingrese S'))
+            while(precioProducto >0) {
+                
+                totalFacturado.push(precioProducto);
+                precioProducto = Number(prompt('ingrese el valor del siguiente producto'));
+                
+            };
+
+            if(precioProducto <=0 || isNaN(precioProducto)) {
+                    alert('El valor ingresado no esta permitido por el sistema, si desea finalizar la');
+            };
+            
+            
+        }
+
+        alert('usted a ingresado' + " " +  [totalFacturado])
 };
+
 
 function descuento() {
 
@@ -35,13 +50,20 @@ function descuento() {
         alert('Ha obtenido un 15% de descuento en el total de compra!')
     }
 
+    for(let index = 1; index <= totalFacturado.length; index++){
+        precioFinal = precioFinal + totalFacturado[index];
+        } 
+        alert(precioFinal)
+
 };
 
-ingresoProducto();
+operacionSistema();
 descuento();
+
 
 
 
 
 console.log('El total de su compra es de $' + ' ' + precioFinal + ' ' + '. Su descuento fue de $' + ' ' + valorDescuento);
 alert('El total de su compra es de $' + ' ' + precioFinal + ' ' + '. Su descuento fue de $' + ' ' + valorDescuento);
+
