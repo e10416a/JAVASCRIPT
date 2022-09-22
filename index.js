@@ -1,69 +1,126 @@
  //DESAFIO 1 - SIMULADOR INTERACTIVO */
 
 
-let precioFinal = 0;
-let opcionSistema = 0;
-let valorDescuento = 0;
-let precioProducto = 0;
-let totalFacturado = [];
-
-alert('Bienvenido al sistema de administracion general. \nA continuacion seleccione la operacion que desea realizar');
-
-
-       
-
-
-function operacionSistema(){
-     opcionSistema = Number(prompt('Seleccione la operacion:\n A: -Facturar pedido\n B: -Ingresar Articulo al stock\n C: -Salir '));
-            
-        if(opcionSistema = "A"){
-
-            precioProducto = Number(prompt('Ingrese el valor del producto a facturar, si desea finalizar la carga ingrese S'))
-            while(precioProducto >0) {
-                
-                totalFacturado.push(precioProducto);
-                precioProducto = Number(prompt('ingrese el valor del siguiente producto'));
-                
-            };
-
-            if(precioProducto <=0 || isNaN(precioProducto)) {
-                    alert('El valor ingresado no esta permitido por el sistema, si desea finalizar la');
-            };
-            
-            
-        }
-
-        alert('usted a ingresado' + " " +  [totalFacturado])
-};
-
-
-function descuento() {
-
-    if(precioFinal >=2000){
-        valorDescuento = (precioFinal * 25) / 100; 
-        precioFinal = precioFinal - valorDescuento;
-        alert('Ha obtenido un 25% de descuento en el total de su compra!')
-    }
-    else{
-        valorDescuento = (precioFinal * 15) / 100; 
-        precioFinal = precioFinal - valorDescuento;
-        alert('Ha obtenido un 15% de descuento en el total de compra!')
-    }
-
-    for(let index = 1; index <= totalFacturado.length; index++){
-        precioFinal = precioFinal + totalFacturado[index];
-        } 
-        alert(precioFinal)
-
-};
-
-operacionSistema();
-descuento();
-
-
-
-
-
-console.log('El total de su compra es de $' + ' ' + precioFinal + ' ' + '. Su descuento fue de $' + ' ' + valorDescuento);
-alert('El total de su compra es de $' + ' ' + precioFinal + ' ' + '. Su descuento fue de $' + ' ' + valorDescuento);
-
+ const carrito = [];
+ const productos = [];
+ 
+ class producto {
+   constructor(id, nombre, precio, stock) {
+     this.id = id;
+     this.nombre = nombre;
+     this.precio = precio;
+     this.stock = stock;
+   }
+   sumarIva() {
+     return (this.precio = this.precio * 1), 21;
+   }
+   vendido() {
+     this.stock = this.stock - 1;
+   }
+ }
+ 
+ const producto1 = new producto(1, "camiseta", 15000, 3);
+ productos.push(producto1);
+ const producto2 = new producto(2, "pantalon", 15000, 4);
+ productos.push(producto2);
+ const producto3 = new producto(3, "short", 9000, 6);
+ productos.push(producto3);
+ const producto4 = new producto(4, "campera", 9000, 2);
+ productos.push(producto4);
+ const producto5 = new producto(5, "medias", 15000, 2);
+ productos.push(producto5);
+ const producto6 = new producto(6, "gorra", 3000, 3);
+ productos.push(producto6);
+ 
+ function mostrarProductos() {
+   alert(
+     "Nuestros productos son los siguientes",
+   );
+   productos.forEach((producto) => {
+     alert(`
+             ${producto.nombre}
+             $${producto.precio}
+         `);
+   });
+ }
+ 
+ function mostrarCarrito() {
+   alert("Usted tiene los siguientes productos en su carrito:");
+   carrito.forEach((producto) => {
+     alert(`
+             ${producto.nombre}
+             $${producto.precio}
+         `);
+   });
+ 
+   let continuar = Number(
+     prompt("Que quiere hacer: 1-confirmar compra, 2-vaciar carrito"),
+   );
+   switch (continuar) {
+     case 1:
+       let total = carrito.reduce((acc, producto) => acc + producto.precio, 0);
+       let iva = total * 1.21;
+       alert(`El total de su compra es de $${iva}`);
+       break;
+     case 2:
+       carrito.splice(0, carrito.length);
+       alert("Su carrito se vacio con exito!");
+       console.log(carrito);
+       break;
+   }
+ }
+ 
+ function comprar() {
+   let compra = Number(
+     prompt(
+       "Elija el producto que quiera: 1-camiseta, 2-pantalon, 3-short, 4-campera, 5-medias, 6-gorra o 0-salir",
+     ),
+   );
+ 
+   while (compra !== 0) {
+     let resultado;
+     switch (compra) {
+       case 1:
+         resultado = productos.find((producto) => producto.id === compra);
+         carrito.push(resultado);
+ 
+         break;
+       case 2:
+         resultado = productos.find((producto) => producto.id === compra);
+         carrito.push(resultado);
+ 
+         break;
+       case 3:
+         resultado = productos.find((producto) => producto.id === compra);
+         carrito.push(resultado);
+ 
+         break;
+       case 4:
+         resultado = productos.find((producto) => producto.id === compra);
+         carrito.push(resultado);
+ 
+         break;
+       case 5:
+         resultado = productos.find((producto) => producto.id === compra);
+         carrito.push(resultado);
+ 
+         break;
+       case 6:
+         resultado = productos.find((producto) => producto.id === compra);
+         carrito.push(resultado);
+ 
+         break;
+       default:
+         alert("Ingrese un producto de la lista por favor");
+     }
+     compra = Number(
+       prompt(
+         "Elija el producto que quiera: 1-camiseta, 2-pantalon, 3-short, 4-campera, 5-medias, 6-gorra o 0-salir",
+       ),
+     );
+   }
+ }
+ 
+ mostrarProductos();
+ comprar();
+ mostrarCarrito();
