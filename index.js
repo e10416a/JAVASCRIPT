@@ -1,6 +1,8 @@
  //DESAFIO 1 - SIMULADOR INTERACTIVO */
 
 
+
+ //ENTREGA PROYECTO FINAL 1
  const carrito = [];
  const productos = [];
  
